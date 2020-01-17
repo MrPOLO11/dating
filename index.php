@@ -16,7 +16,8 @@ $f3 = Base::instance();
 
 //Define a default route
 $f3->route('GET /', function() {
-    echo"Hello, World";
+    $view = new Template();
+    echo $view->render('views/home.html');
 });
 
 $f3->run();

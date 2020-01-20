@@ -1,3 +1,9 @@
+<!--
+    Marcos Rivera
+    IT 328 Full Stack
+    Dating Assignment
+    https://marcosrivera.greenriverdev.com/328/dating/
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,12 +11,59 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="styles/pizza.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
 
     <title>Dating Page</title>
 </head>
 <body>
-<h1>Light My Spark Dating</h1>
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Light My Spark</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container fluid border" id="content-border">
+    <div class="row" id="site-content">
+        <div class="col">
+            <br><h1 class="text-center">Light My Spark Dating</h1>
+            <p>Welcome to the web's most successful dating website! At <strong>Light My Spark</strong>
+            you'll meet like minded individuals! We have the highest success rate
+            of couples on the web. User's are matched by interests and location!
+            Find out why so many others have found love on our site!</p>
+            <h5 class="text-center">Hear what our users are saying about us!</h5>
+            <p class=" border-bottom border-top font-italic">"I met the love of my life
+                after only a month!" -Andross <br><br>"It was so easy to set up a profile
+                and start meeting people! I didn't realize how many others were looking
+                for love in my area." -Duke <br><br>"Just try it! You'll never be the same!"
+                -Clank
+            </p>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary">Create A Profile!</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+            <img src="images/spark.jpg" id="spark">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

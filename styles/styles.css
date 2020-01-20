@@ -1,0 +1,16 @@
+/**
+    Marcos Rivera
+    Dating styles sheet
+    https://marcosrivera.greenriverdev.com/328/dating/
+ */
+#content-border {
+    margin-top: 2em;
+}
+#site-content{
+    padding: 2em;
+}
+#spark {
+    width: 35em;
+    height: 25em;
+    border-radius: 2em;
+}

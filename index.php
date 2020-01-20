@@ -2,7 +2,7 @@
 /**
  * Marcos Rivera
  * 01-15-2020
- * 328/chicken/index.php
+ * 328/dating/index.php
  */
 
 ini_set('display_errors', 1);

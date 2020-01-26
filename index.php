@@ -20,4 +20,10 @@ $f3->route('GET /', function() {
     echo $view->render('views/home.html');
 });
 
+//Define a personal route
+$f3->route('POST /personal', function() {
+    $view = new Template();
+    echo $view->render('views/personal-information.html');
+});
+
 $f3->run();

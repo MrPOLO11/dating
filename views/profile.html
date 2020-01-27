@@ -1,9 +1,62 @@
 <include href="views/header.html">
     <div class="container fluid border" id="content-border">
-        <form method="post" action="interests">
-            <div class="float-right">
-                <button type="submit" class="btn btn-primary">Next >></button>
-            </div>
-        </form>
+        <div class="row">
+            <h1>Profile</h1>
+            <hr>
+            <form method="post" action="interests" class="col-12">
+                <div class="row">
+                    <div class="col order-12">
+                        <div class="form-group">
+                            <label for="bio">Biography</label>
+                            <textarea class="form-control" id="bio" rows="3" name="bio"></textarea>
+                        </div>
+                    </div>
+                    <div class="col order-1">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <select class="form-control" name="state">
+                                <option value="select">Select</option>
+                                <option value="AL">ALABAMA</option><option value="AK">ALASKA</option><option value="AR">ARKANSAS</option>
+                                <option value="AZ">ARIZONA</option><option value="CA">CALIFORNIA</option><option value="CO">COLORADO</option>
+                                <option value="CT">CONNECTICUT</option><option value="DE">DELAWARE</option>
+                                <option value="FL">FLORIDA</option><option value="GA">GEORGIA</option><option value="HI">HAWAII</option>
+                                <option value="IA">IOWA</option><option value="ID">IDAHO</option><option value="IL">ILLINOIS</option>
+                                <option value="IN">INDIANA</option><option value="KS">KANSAS</option><option value="KY">KENTUCKY</option>
+                                <option value="LA">LOUISIANA</option><option value="MA">MASSACHUSETTS</option><option value="MD">MARYLAND</option>
+                                <option value="ME">MAINE</option><option value="MI">MICHIGAN</option><option value="MN">MINNESOTA</option>
+                                <option value="MO">MISSOURI</option><option value="MS">MISSISSIPPI</option><option value="MT">MONTANA</option>
+                                <option value="NC">NORTH CAROLINA</option><option value="NE">NEBRASKA</option><option value="NH">NEW HAMPSHIRE</option>
+                                <option value="NJ">NEW JERSEY</option><option value="NM">NEW MEXICO</option><option value="NV">NEVADA</option>
+                                <option value="NY">NEW YORK</option><option value="ND">NORTH DAKOTA</option><option value="OH">OHIO</option>
+                                <option value="OK">OKLAHOMA</option><option value="OR">OREGON</option><option value="PA">PENNSYLVANIA</option>
+                                <option value="RI">RHODE ISLAND</option><option value="SC">SOUTH CAROLINA</option><option value="SD">SOUTH DAKOTA</option>
+                                <option value="TN">TENNESSEE</option><option value="TX">TEXAS</option><option value="UT">UTAH</option>
+                                <option value="VT">VERMONT</option><option value="VA">VIRGINA</option><option value="WA">WASHINGTON</option>
+                                <option value="WI">WISCONSIN</option><option value="WV">WEST VIRGINA</option><option value="WY">WYOMING</option>
+                            </select>
+                        </div>
+
+                        <label>Seeking</label>
+                        <div class="form-group">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="seek-male" id="seek-male" value="seek-male">
+                                <label class="form-check-label" for="seek-male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="seek-female" id="seek-female" value="seek-female">
+                                <label class="form-check-label" for="seek-female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary float-right" type="submit">Next >></button>
+                </div>
+            </form>
+        </div>
     </div>
 <include href="views/footer.html">

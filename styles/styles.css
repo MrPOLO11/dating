@@ -4,7 +4,8 @@
     https://marcosrivera.greenriverdev.com/328/dating/
  */
 #content-border {
-    margin-top: 2em;
+    margin: 2em;
+    padding: 2em;
 }
 #site-content{
     padding: 2em;

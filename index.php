@@ -5,6 +5,8 @@
  * 328/dating/index.php
  */
 
+session_start();
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -28,18 +30,21 @@ $f3->route('POST /personal', function() {
 
 //Define a profile route
 $f3->route('POST /profile', function() {
+    var_dump($_POST);
     $view = new Template();
     echo $view->render('views/profile.html');
 });
 
 //Define a personal route
 $f3->route('POST /interests', function() {
+    var_dump($_POST);
     $view = new Template();
     echo $view->render('views/interests.html');
 });
 
 //Define a personal route
 $f3->route('POST /summary', function() {
+    var_dump($_POST);
     $view = new Template();
     echo $view->render('views/profile-summary.html');
 });

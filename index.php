@@ -30,21 +30,34 @@ $f3->route('POST /personal', function() {
 
 //Define a profile route
 $f3->route('POST /profile', function() {
-    var_dump($_POST);
+    $_SESSION['fname'] = $_POST['fname'];
+    $_SESSION['lname'] = $_POST['lname'];
+    $_SESSION['age'] = $_POST['age'];
+    $_SESSION['gender'] = $_POST['gender'];
+    $_SESSION['telephone'] = $_POST['telephone'];
     $view = new Template();
     echo $view->render('views/profile.html');
 });
 
 //Define a personal route
 $f3->route('POST /interests', function() {
-    var_dump($_POST);
+    $_SESSION['bio'] = $_POST['bio'];
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['state'] = $_POST['state'];
+    $_SESSION['seek'] = $_POST['seek'];
     $view = new Template();
     echo $view->render('views/interests.html');
 });
 
 //Define a personal route
 $f3->route('POST /summary', function() {
-    var_dump($_POST);
+    $_SESSION['interest'] = "";
+    if(!empty($_POST['interest'])) {
+        $_SESSION['choices'] = $_POST['interest'];
+        foreach ($_SESSION['choices'] AS $choice) {
+            $_SESSION['interest'] = $_SESSION['interest']." $choice";
+        }
+    }
     $view = new Template();
     echo $view->render('views/profile-summary.html');
 });

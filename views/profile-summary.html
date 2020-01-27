@@ -6,18 +6,22 @@
                         <div class="form-group">
                             <img class="img-fluid text-center" src="images/profile-pic.png" alt="default blank profile picture">
                         </div>
+                        <div class="form-group">
+                            <label>Biography</label>
+                            <p>{{@SESSION.bio}}</p>
+                        </div>
                     </div>
                     <div class="col order-1">
                         <div class="card" style="width: 18rem;">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Name: </li>
-                                <li class="list-group-item">Gender: </li>
-                                <li class="list-group-item">Age: </li>
-                                <li class="list-group-item">Phone: </li>
-                                <li class="list-group-item">Email: </li>
-                                <li class="list-group-item">State: </li>
-                                <li class="list-group-item">Seeking: </li>
-                                <li class="list-group-item">Interests: </li>
+                                <li class="list-group-item">Name: {{@SESSION.fname}} {{@SESSION.lname}}</li>
+                                <li class="list-group-item">Gender: {{@SESSION.gender}}</li>
+                                <li class="list-group-item">Age: {{@SESSION.age}}</li>
+                                <li class="list-group-item">Phone: {{@SESSION.telephone}}</li>
+                                <li class="list-group-item">Email: {{@SESSION.email}}</li>
+                                <li class="list-group-item">State: {{@SESSION.state}}</li>
+                                <li class="list-group-item">Seeking: {{@SESSION.seek}}</li>
+                                <li class="list-group-item">Interests: {{@SESSION.interest}}</li>
                             </ul>
                         </div>
                     </div>

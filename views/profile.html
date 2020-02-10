@@ -8,48 +8,47 @@
                     <div class="col order-12">
                         <div class="form-group">
                             <label for="bio">Biography</label>
-                            <textarea class="form-control" id="bio" rows="3" name="bio"></textarea>
+                            <textarea class="form-control" id="bio" rows="3" name="bio">{{ @bio }}</textarea>
                         </div>
                     </div>
                     <div class="col order-1">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email" name="email" value="{{ @email }}">
+                            <check if="{{ @errors['email'] }}">
+                                <span class="err">{{ @errors['email'] }}</span>
+                            </check><br><br>
                         </div>
                         <div class="form-group">
                             <label>State</label>
                             <select class="form-control" name="state">
                                 <option value="select">Select</option>
-                                <option value="ALABAMA">ALABAMA</option><option value="ALASKA">ALASKA</option><option value="ARKANSAS">ARKANSAS</option>
-                                <option value="ARIZONA">ARIZONA</option><option value="CALIFORNIA">CALIFORNIA</option><option value="COLORADO">COLORADO</option>
-                                <option value="CONNECTICUT">CONNECTICUT</option><option value="DELAWARE">DELAWARE</option>
-                                <option value="FLORIDA">FLORIDA</option><option value="GEORGIA">GEORGIA</option><option value="HAWAII">HAWAII</option>
-                                <option value="IOWA">IOWA</option><option value="IDAHO">IDAHO</option><option value="ILLINOIS">ILLINOIS</option>
-                                <option value="INDIANA">INDIANA</option><option value="KANSAS">KANSAS</option><option value="KENTUCKY">KENTUCKY</option>
-                                <option value="LOUISIANA">LOUISIANA</option><option value="MASSACHUSETTS">MASSACHUSETTS</option><option value="MARYLAND">MARYLAND</option>
-                                <option value="MAINE">MAINE</option><option value="MICHIGAN">MICHIGAN</option><option value="MINNESOTA">MINNESOTA</option>
-                                <option value="MISSOURI">MISSOURI</option><option value="MISSISSIPPI">MISSISSIPPI</option><option value="MONTANA">MONTANA</option>
-                                <option value="NORTH CAROLINA">NORTH CAROLINA</option><option value="NEBRASKA">NEBRASKA</option><option value="NEW HAMPSHIRE">NEW HAMPSHIRE</option>
-                                <option value="NEW JERSEY">NEW JERSEY</option><option value="NEW MEXICO">NEW MEXICO</option><option value="NEVADA">NEVADA</option>
-                                <option value="NEW YORK">NEW YORK</option><option value="NORTH DAKOTA">NORTH DAKOTA</option><option value="OHIO">OHIO</option>
-                                <option value="OKLAHOMA">OKLAHOMA</option><option value="OREGON">OREGON</option><option value="PENNSYLVANIA">PENNSYLVANIA</option>
-                                <option value="RHODE ISLAND">RHODE ISLAND</option><option value="SOUTH CAROLINA">SOUTH CAROLINA</option><option value="SOUTH DAKOTA">SOUTH DAKOTA</option>
-                                <option value="TENNESSEE">TENNESSEE</option><option value="TEXAS">TEXAS</option><option value="UTAH">UTAH</option>
-                                <option value="VERMONT">VERMONT</option><option value="VIRGINA">VIRGINA</option><option value="WASHINGTON">WASHINGTON</option>
-                                <option value="WISCONSIN">WISCONSIN</option><option value="WEST VIRGINA">WEST VIRGINA</option><option value="WYOMING">WYOMING</option>
+                                <repeat group="{{ @states }}" key="{{ @key }}" value="{{ @value }}">
+                                    <check if="{{ @state == @key }}">
+                                        <true><option value="{{ @key }}" selected>{{ @value }}</option></true>
+                                        <false><option value="{{ @key }}">{{ @value }}</option></false>
+                                    </check>
+                                </repeat>
                             </select>
                         </div>
 
                         <label>Seeking</label>
                         <div class="form-group">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="seek" id="seek-male" value="Male">
-                                <label class="form-check-label" for="seek-male">Male</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="seek" id="seek-female" value="Female">
-                                <label class="form-check-label" for="seek-female">Female</label>
-                            </div>
+                            <repeat group="{{ @genders }}" value="{{ @genderSeek }}">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio"
+                                           class="custom-control-input" id="{{ @genderSeek }}"
+                                           name="seek"
+                                           value="{{ @genderSeek }}"
+
+                                    <check if="{{ @seek == @genderSeek }}">
+                                        checked="checked"
+                                    </check>
+
+                                    ><label class="custom-control-label" for="{{ @genderSeek }}">{{ @genderSeek }}
+                                </label><br>
+                                </div>
+                            </repeat>
                         </div>
                     </div>
                 </div>

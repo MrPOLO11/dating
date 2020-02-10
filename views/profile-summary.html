@@ -15,13 +15,13 @@
                         <div class="card" style="width: 18rem;">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">Name: {{@SESSION.fname}} {{@SESSION.lname}}</li>
-                                <!--<li class="list-group-item">Gender: {{@SESSION.gender}}</li>
+                                <li class="list-group-item">Gender: {{@SESSION.gender}}</li>
                                 <li class="list-group-item">Age: {{@SESSION.age}}</li>
-                                <li class="list-group-item">Phone: {{@SESSION.telephone}}</li>
+                                <li class="list-group-item">Phone: {{@SESSION.phone}}</li>
                                 <li class="list-group-item">Email: {{@SESSION.email}}</li>
                                 <li class="list-group-item">State: {{@SESSION.state}}</li>
                                 <li class="list-group-item">Seeking: {{@SESSION.seek}}</li>
-                                <li class="list-group-item">Interests: {{@SESSION.interest}}</li>-->
+                                <li class="list-group-item">Interests: {{ implode(", ", @SESSION.selectIndoorInterests) }} </li>
                             </ul>
                         </div>
                     </div>

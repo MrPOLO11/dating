@@ -37,9 +37,9 @@ function validProfile() {
 function validActivities() {
     global $f3;
     $isValid = true;
-    if(!validOutdoor($f3->get('outdoorInterests')) || !validIndoor($f3->get('indoorInterests'))) {
+    if(!validOutdoor($f3->get('selectOutdoorInterests')) || !validIndoor($f3->get('selectIndoorInterests'))) {
         $isValid = false;
-        $f3->set("errors['indoor']", "You must choose from the list");
+        $f3->set("errors['activities']", "You must choose from the list");
     }
     return $isValid;
 }
@@ -69,11 +69,27 @@ function validEmail($email)
 function validOutdoor($outdoorActs)
 {
     global $f3;
-    return in_array($outdoorActs, $f3->get('outdoorActs'));
+    if(count($outdoorActs) == 0) {
+        return true;
+    }
+    foreach ($outdoorActs AS $choice) {
+        if(in_array($choice, $f3->get(selectOutdoorInterests))) {
+            return false;
+        }
+    }
+    return false;
 }
 
 function validIndoor($indoorActs)
 {
     global $f3;
-    return in_array($indoorActs, $f3->get('indoorActs'));
+    if(count($indoorActs) == 0) {
+        return true;
+    }
+    foreach ($indoorActs AS $choice) {
+        if(in_array($choice, $f3->get(selectIndoorInterests))) {
+            return false;
+        }
+    }
+    return false;
 }

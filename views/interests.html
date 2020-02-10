@@ -5,81 +5,36 @@
             <form method="post" action="#" class="col-12">
                 <label>In-door Activities</label>
                 <div class="form-group">
+                    <repeat group="{{ @indoorInterests }}" value="{{ @indoorChoice }}">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="tv" value="tv" name="interest[]">
-                        <label class="form-check-label" for="tv">tv</label>
+                            <input class="form-check-input" type="checkbox" id="{{ @indoorChoice }}" value="{{ @indoorChoice }}" name="indoorInterests"
+                            <check if="{{ isset(@selectedIndoorInterests) && in_array(@indoorChoice, @selectedIndoorInterests) }}">
+                                checked="checked"
+                            </check>
+                            ><label class="form-check-label" for="{{ @indoorChoice }}">{{ @indoorChoice }}</label>
                     </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="movies" value="movies" name="interest[]">
-                        <label class="form-check-label" for="movies">movies</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="cooking" value="cooking" name="interest[]">
-                        <label class="form-check-label" for="cooking">cooking</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="boardgames" value="boardgames" name="interest[]">
-                        <label class="form-check-label" for="boardgames">boardgames</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="puzzles" value="puzzles" name="interest[]">
-                        <label class="form-check-label" for="puzzles">puzzles</label>
-                    </div>
-
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="reading" value="reading" name="interest[]">
-                        <label class="form-check-label" for="reading">reading</label>
-                    </div>
-
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="playing-cards" value="playing cards" name="interest[]">
-                        <label class="form-check-label" for="playing-cards">playing cards</label>
-                    </div>
-
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="videogames" value="video games" name="interest[]">
-                        <label class="form-check-label" for="videogames">video games</label>
-                    </div>
+                    </repeat>
                 </div>
 
                 <label>Outdoor Activities</label>
                 <div class="form-group">
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="hiking" value="hiking" name="interest[]">
-                        <label class="form-check-label" for="hiking">hiking</label>
+                    <div class="form-group">
+                        <repeat group="{{ @outdoorInterests }}" value="{{ @outdoorChoice }}">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="{{ @outdoorChoice }}" value="{{ @outdoorChoice }}" name="outdoorInterests"
+                                <check if="{{ isset(@selectedOutdoorInterests) && in_array(@outdoorChoice, @selectedOutdoorInterests) }}">
+                                    checked="checked"
+                                </check>
+                                ><label class="form-check-label" for="{{ @outdoorChoice }}">{{ @outdoorChoice }}</label>
+                            </div>
+                        </repeat>
                     </div>
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="biking" value="biking" name="interest[]">
-                        <label class="form-check-label" for="biking">biking</label>
-                    </div>
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="swimming" value="swimming" name="interest[]">
-                        <label class="form-check-label" for="swimming">swimming</label>
-                    </div>
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="collecting" value="collecting" name="interest[]">
-                        <label class="form-check-label" for="collecting">collecting</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="walking" value="walking" name="interest[]">
-                        <label class="form-check-label" for="walking">walking</label>
-                    </div>
-                    <div class="form-check form-check-inline wrap">
-                        <input class="form-check-input" type="checkbox" id="climbing" value="climbing" name="interest[]">
-                        <label class="form-check-label" for="climbing">climbing</label>
-                    </div>
-                </div>
                 <div class="row">
 
                 </div>
+                <check if="{{ @errors['activities'] }}">
+                    <span class="err">{{ @errors['activities'] }}</span>
+                </check><br><br>
                 <div class="form-group">
                     <button class="btn btn-primary float-right" type="submit">Next >></button>
                 </div>

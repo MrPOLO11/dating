@@ -22,8 +22,8 @@ $f3->set('DEBUG', 3);
 
 //Define arrays
 $f3->set('genders', array('Male', 'Female'));
-$f3->set('indoorActs', array('tv', 'movie', 'cooking', 'boardgames', 'puzzles', 'reading', 'playing cards', 'video games'));
-$f3->set('outdoorActs', array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing'));
+$f3->set('indoorInterests', array('tv', 'movie', 'cooking', 'boardgames', 'puzzles', 'reading', 'playing cards', 'video games'));
+$f3->set('outdoorInterests', array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing'));
 $f3->set('states', array('AL'=>'Alabama',
     'AK'=>'Alaska',
     'AZ'=>'Arizona',
@@ -142,20 +142,30 @@ $f3->route('GET|POST /profile', function($f3) {
 });
 
 //Define a personal route
-$f3->route('GET|POST /interests', function() {
+$f3->route('GET|POST /interests', function($f3) {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (!empty($_POST['indoorInterests'])) {
+            $selectIndoorInterests = $_POST['indoorInterests'];
+        }
+        if (!empty($_POST['outdoorInterests'])) {
+            $selectOutdoorInterests = $_POST['outdoorInterests'];
+        }
+
+        $f3->set('selectIndoorInterests', $selectIndoorInterests);
+        $f3->set('selectOutdoorInterests', $selectOutdoorInterests);
+
+        if(validActivities()) {
+            $_SESSION['selectIndoorInterests'] = $selectIndoorInterests;
+            $_SESSION['selectOutdoorInterests'] = $selectOutdoorInterests;
+            $f3->reroute('/summary');
+        }
+    }
     $view = new Template();
     echo $view->render('views/interests.html');
 });
 
 //Define a personal route
-$f3->route('POST /summary', function() {
-    $_SESSION['interest'] = "";
-    if(!empty($_POST['interest'])) {
-        $_SESSION['choices'] = $_POST['interest'];
-        foreach ($_SESSION['choices'] AS $choice) {
-            $_SESSION['interest'] = $_SESSION['interest']." $choice";
-        }
-    }
+$f3->route('GET /summary', function() {
     $view = new Template();
     echo $view->render('views/profile-summary.html');
 });

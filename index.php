@@ -21,6 +21,7 @@ $f3 = Base::instance();
 $f3->set('DEBUG', 3);
 
 //Define arrays
+$f3->set('genders', array('Male', 'Female'));
 
 //Define a default route
 $f3->route('GET /', function() {
@@ -32,21 +33,27 @@ $f3->route('GET /', function() {
 $f3->route('GET|POST /personal', function($f3) {
     $view = new Template();
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //Validate all
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $age = $_POST['age'];
         $phone = $_POST['phone'];
 
+        //Optional
+        $gender = $_POST['gender'];
+
         $f3->set('fname', $fname);
         $f3->set('lname', $lname);
         $f3->set('age', $age);
         $f3->set('phone', $phone);
+        $f3->set('gender', $gender);
 
         if(validPersonalInformation()) {
             $_SESSION['fname'] = $fname;
             $_SESSION['lname'] = $lname;
             $_SESSION['age'] = $age;
             $_SESSION['phone'] = $phone;
+            $_SESSION['gender'] = $gender;
             $f3->reroute('/profile');
         }
     }

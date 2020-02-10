@@ -39,15 +39,21 @@
 
                         <label>Gender</label>
                         <div class="form-group">
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="male" name="gender" value="male">
-                                <label class="custom-control-label" for="male">Male</label>
-                            </div>
+                            <repeat group="{{ @genders }}" value="{{ @genderOption }}">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio"
+                                                  class="custom-control-input" id="{{ @genderOption }}"
+                                                  name="gender"
+                                                  value="{{ @genderOption }}"
 
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="female" name="gender" value="female">
-                                <label class="custom-control-label" for="female">Female</label>
-                            </div>
+                                        <check if="{{ @gender == @genderOption }}">
+                                            checked="checked"
+                                        </check>
+
+                                        ><label class="custom-control-label" for="{{ @genderOption }}">{{ @genderOption }}
+                                    </label><br>
+                                </div>
+                            </repeat>
                         </div>
 
                         <div class="form-group">

@@ -9,7 +9,11 @@ class PremiumMember extends Member
      */
     public function getInDoorInterests()
     {
-        return implode(" ",$this->_inDoorInterests);
+        if(empty($this->_inDoorInterests)) {
+            return "";
+        } else {
+            return implode(" ", $this->_inDoorInterests);
+        }
     }
 
     /**
@@ -25,7 +29,11 @@ class PremiumMember extends Member
      */
     public function getOutDoorInterests()
     {
-        return implode(" ",$this->_outDoorInterests);
+        if(empty($this->_outDoorInterests)) {
+            return "";
+        } else {
+            return implode(" ", $this->_outDoorInterests);
+        }
     }
 
     /**

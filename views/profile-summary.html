@@ -23,7 +23,8 @@
                                 <li class="list-group-item">State: {{@SESSION.member->getState()}}</li>
                                 <li class="list-group-item">Seeking: {{@SESSION.member->getSeeking()}}</li>
                                 <check if="{{@SESSION.premium}} == 'isPremium'">
-                                    <li class="list-group-item">Interests:  {{@SESSION.member->getInDoorInterests()}}
+                                    <li class="list-group-item">Interests:
+                                        {{@SESSION.member->getInDoorInterests()}}
                                         {{@SESSION.member->getOutDoorInterests()}}</li>
                                 </check>
                             </ul>

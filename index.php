@@ -121,8 +121,7 @@ $f3->route('GET|POST /personal', function($f3) {
             $f3->reroute('/profile');
         }
     }
-    $view = new Template();
-    echo $view->render('views/personal-information.html');
+    $GLOBALS['controller']->personalInfo();
 });
 
 //Define a profile route
@@ -158,8 +157,7 @@ $f3->route('GET|POST /profile', function($f3) {
             $f3->reroute('/summary');
         }
     }
-    $view = new Template();
-    echo $view->render('views/profile.html');
+    $GLOBALS['controller']->profile();
 });
 
 //Define a personal route
@@ -178,14 +176,12 @@ $f3->route('GET|POST /interests', function($f3) {
             $f3->reroute('/summary');
         }
     }
-    $view = new Template();
-    echo $view->render('views/interests.html');
+    $GLOBALS['controller']->interests();
 });
 
 //Define a personal route
 $f3->route('GET /summary', function() {
-    $view = new Template();
-    echo $view->render('views/profile-summary.html');
+    $GLOBALS['controller']->summary();
 });
 
 $f3->run();

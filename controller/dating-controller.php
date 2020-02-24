@@ -8,7 +8,7 @@ class DatingController
     public function __construct($f3)
     {
         $this->_f3 = $f3;
-        $this->_val = new Validation();
+        $this->_val = new Model();
     }
 
     function home()
@@ -38,4 +38,5 @@ class DatingController
         $view = new Template();
         echo $view->render('views/profile-summary.html');
     }
+
 }

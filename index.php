@@ -5,8 +5,6 @@
  * 328/dating/index.php
  */
 
-session_start();
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -14,11 +12,16 @@ error_reporting(E_ALL);
 require_once ('vendor/autoload.php');
 require_once ('model/validate.php');
 
+//Start session
+session_start();
+
 //Instantiate Fat-Free framework (F3)
 $f3 = Base::instance();
 
 //Turn on Fat-Free error reporting
 $f3->set('DEBUG', 3);
+
+$controller = new DatingController($f3);
 
 //Define arrays
 $f3->set('genders', array('Male', 'Female'));
@@ -78,8 +81,7 @@ $f3->set('states', array('AL'=>'Alabama',
 
 //Define a default route
 $f3->route('GET /', function() {
-    $view = new Template();
-    echo $view->render('views/home.html');
+    $GLOBALS['controller']->home();
 });
 
 //Define a personal route
@@ -93,19 +95,29 @@ $f3->route('GET|POST /personal', function($f3) {
 
         //Optional
         $gender = $_POST['gender'];
+        $premium = $_POST['premium'];
 
         $f3->set('fname', $fname);
         $f3->set('lname', $lname);
         $f3->set('age', $age);
         $f3->set('phone', $phone);
         $f3->set('gender', $gender);
+        $f3->set('premium', $premium);
 
         if(validPersonalInformation()) {
+            if($premium === "checked") {
+                $_SESSION['member'] = new PremiumMember($fname, $lname, $age, $gender, $phone);
+                $_SESSION['premium'] = "isPremium";
+            } else {
+                $_SESSION['member'] = new Member($fname, $lname, $age, $gender, $phone);
+            }
+            /*
             $_SESSION['fname'] = $fname;
             $_SESSION['lname'] = $lname;
             $_SESSION['age'] = $age;
             $_SESSION['phone'] = $phone;
             $_SESSION['gender'] = $gender;
+            */
             $f3->reroute('/profile');
         }
     }
@@ -130,11 +142,20 @@ $f3->route('GET|POST /profile', function($f3) {
         $f3->set('bio', $bio);
 
         if(validProfile()) {
+            $_SESSION['member']->setEmail($email);
+            $_SESSION['member']->setSeeking($seek);
+            $_SESSION['member']->setState($state);
+            $_SESSION['member']->setBio($bio);
+            /*
             $_SESSION['email'] = $email;
             $_SESSION['seek'] = $seek;
             $_SESSION['state'] = $state;
             $_SESSION['bio'] = $bio;
-            $f3->reroute('/interests');
+            */
+            if($_SESSION['premium'] === "isPremium") {
+                $f3->reroute('/interests');
+            }
+            $f3->reroute('/summary');
         }
     }
     $view = new Template();
@@ -144,19 +165,16 @@ $f3->route('GET|POST /profile', function($f3) {
 //Define a personal route
 $f3->route('GET|POST /interests', function($f3) {
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (!empty($_POST['indoorInterests'])) {
-            $selectIndoorInterests = $_POST['indoorInterests'];
-        }
-        if (!empty($_POST['outdoorInterests'])) {
-            $selectOutdoorInterests = $_POST['outdoorInterests'];
-        }
+
+        $selectIndoorInterests = $_POST['indoorInterests'];
+        $selectOutdoorInterests = $_POST['outdoorInterests'];
 
         $f3->set('selectIndoorInterests', $selectIndoorInterests);
         $f3->set('selectOutdoorInterests', $selectOutdoorInterests);
 
         if(validActivities()) {
-            $_SESSION['selectIndoorInterests'] = $selectIndoorInterests;
-            $_SESSION['selectOutdoorInterests'] = $selectOutdoorInterests;
+            $_SESSION['member']->setInDoorInterests($_POST['indoorInterests']);
+            $_SESSION['member']->setOutDoorInterests($_POST['outdoorInterests']);
             $f3->reroute('/summary');
         }
     }

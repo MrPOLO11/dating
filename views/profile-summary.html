@@ -8,20 +8,24 @@
                         </div>
                         <div class="form-group">
                             <label>Biography</label>
-                            <p>{{@SESSION.bio}}</p>
+                            <p>{{@SESSION.member->getBio()}}</p>
                         </div>
                     </div>
                     <div class="col order-1">
                         <div class="card" style="width: 18rem;">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Name: {{@SESSION.fname}} {{@SESSION.lname}}</li>
-                                <li class="list-group-item">Gender: {{@SESSION.gender}}</li>
-                                <li class="list-group-item">Age: {{@SESSION.age}}</li>
-                                <li class="list-group-item">Phone: {{@SESSION.phone}}</li>
-                                <li class="list-group-item">Email: {{@SESSION.email}}</li>
-                                <li class="list-group-item">State: {{@SESSION.state}}</li>
-                                <li class="list-group-item">Seeking: {{@SESSION.seek}}</li>
-                                <li class="list-group-item">Interests: {{ implode(", ", @SESSION.selectIndoorInterests) }} </li>
+                                <li class="list-group-item">Name: {{@SESSION.member->getFname()}}
+                                    {{@SESSION.member->getLname()}}</li>
+                                <li class="list-group-item">Gender: {{@SESSION.member->getGender()}}</li>
+                                <li class="list-group-item">Age: {{@SESSION.member->getAge()}}</li>
+                                <li class="list-group-item">Phone: {{@SESSION.member->getPhone()}}</li>
+                                <li class="list-group-item">Email: {{@SESSION.member->getEmail()}}</li>
+                                <li class="list-group-item">State: {{@SESSION.member->getState()}}</li>
+                                <li class="list-group-item">Seeking: {{@SESSION.member->getSeeking()}}</li>
+                                <check if="{{@SESSION.premium}} == 'isPremium'">
+                                    <li class="list-group-item">Interests:  {{@SESSION.member->getInDoorInterests()}}
+                                        {{@SESSION.member->getOutDoorInterests()}}</li>
+                                </check>
                             </ul>
                         </div>
                     </div>

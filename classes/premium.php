@@ -1,14 +1,40 @@
 <?php
-
 class PremiumMember extends Member
 {
-    private function _inDoorInterests()
-    {
+    private $_inDoorInterests;
+    private $_outDoorInterests;
 
+    /**
+     * @return mixed
+     */
+    public function getInDoorInterests()
+    {
+        return implode(" ",$this->_inDoorInterests);
     }
 
-    private function _outDoorInterests()
+    /**
+     * @param mixed $inDoorInterests
+     */
+    public function setInDoorInterests($inDoorInterests)
     {
-
+        $this->_inDoorInterests = $inDoorInterests;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOutDoorInterests()
+    {
+        return implode(" ",$this->_outDoorInterests);
+    }
+
+    /**
+     * @param mixed $outDoorInterests
+     */
+    public function setOutDoorInterests($outDoorInterests)
+    {
+        $this->_outDoorInterests = $outDoorInterests;
+    }
+
+
 }

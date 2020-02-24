@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <repeat group="{{ @indoorInterests }}" value="{{ @indoorChoice }}">
                     <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="{{ @indoorChoice }}" value="{{ @indoorChoice }}" name="indoorInterests"
+                            <input class="form-check-input" type="checkbox" id="{{ @indoorChoice }}" value="{{ @indoorChoice }}" name="indoorInterests[]"
                             <check if="{{ isset(@selectedIndoorInterests) && in_array(@indoorChoice, @selectedIndoorInterests) }}">
                                 checked="checked"
                             </check>
@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <repeat group="{{ @outdoorInterests }}" value="{{ @outdoorChoice }}">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="{{ @outdoorChoice }}" value="{{ @outdoorChoice }}" name="outdoorInterests"
+                                <input class="form-check-input" type="checkbox" id="{{ @outdoorChoice }}" value="{{ @outdoorChoice }}" name="outdoorInterests[]"
                                 <check if="{{ isset(@selectedOutdoorInterests) && in_array(@outdoorChoice, @selectedOutdoorInterests) }}">
                                     checked="checked"
                                 </check>

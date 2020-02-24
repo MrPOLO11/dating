@@ -37,7 +37,7 @@ function validProfile() {
 function validActivities() {
     global $f3;
     $isValid = true;
-    if(!validOutdoor($f3->get('selectOutdoorInterests')) || !validIndoor($f3->get('selectIndoorInterests'))) {
+    if(!validOutdoor() || !validIndoor()) {
         $isValid = false;
         $f3->set("errors['activities']", "You must choose from the list");
     }
@@ -66,30 +66,34 @@ function validEmail($email)
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function validOutdoor($outdoorActs)
+function validOutdoor()
 {
     global $f3;
+    $outdoorActs = $f3->get("selectOutdoorInterests");
     if(count($outdoorActs) == 0) {
         return true;
-    }
-    foreach ($outdoorActs AS $choice) {
-        if(in_array($choice, $f3->get(selectOutdoorInterests))) {
-            return false;
+    } else {
+        foreach ($outdoorActs AS $choice) {
+            if (!in_array($choice, $f3->get("outdoorInterests"))) {
+                return false;
+            }
         }
-    }
-    return false;
-}
-
-function validIndoor($indoorActs)
-{
-    global $f3;
-    if(count($indoorActs) == 0) {
         return true;
     }
-    foreach ($indoorActs AS $choice) {
-        if(in_array($choice, $f3->get(selectIndoorInterests))) {
-            return false;
+}
+
+function validIndoor()
+{
+    global $f3;
+    $indoorActs = $f3->get("selectIndoorInterests");
+    if(count($indoorActs) == 0) {
+        return true;
+    } else {
+        foreach ($indoorActs AS $choice) {
+            if(!in_array($choice, $f3->get("indoorInterests"))) {
+                return false;
+            }
         }
+        return true;
     }
-    return false;
 }

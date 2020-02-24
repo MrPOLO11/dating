@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 
 //Require autoload file
 require_once ('vendor/autoload.php');
-require_once ('model/validate.php');
+//require_once ('model/validate.php');
 
 //Start session
 session_start();
@@ -104,7 +104,7 @@ $f3->route('GET|POST /personal', function($f3) {
         $f3->set('gender', $gender);
         $f3->set('premium', $premium);
 
-        if(validPersonalInformation()) {
+        if($GLOBALS['controller']->validPersonalInformation()) {
             if($premium === "checked") {
                 $_SESSION['member'] = new PremiumMember($fname, $lname, $age, $gender, $phone);
                 $_SESSION['premium'] = "isPremium";
@@ -140,7 +140,7 @@ $f3->route('GET|POST /profile', function($f3) {
         $f3->set('state', $state);
         $f3->set('bio', $bio);
 
-        if(validProfile()) {
+        if($GLOBALS['controller']->validProfile()) {
             $_SESSION['member']->setEmail($email);
             $_SESSION['member']->setSeeking($seek);
             $_SESSION['member']->setState($state);
@@ -170,7 +170,7 @@ $f3->route('GET|POST /interests', function($f3) {
         $f3->set('selectIndoorInterests', $selectIndoorInterests);
         $f3->set('selectOutdoorInterests', $selectOutdoorInterests);
 
-        if(validActivities()) {
+        if($GLOBALS['controller']->validActivities()) {
             $_SESSION['member']->setInDoorInterests($_POST['indoorInterests']);
             $_SESSION['member']->setOutDoorInterests($_POST['outdoorInterests']);
             $f3->reroute('/summary');

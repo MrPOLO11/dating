@@ -60,12 +60,50 @@ class Database
 
     function getMembers()
     {
+        $sql = "SELECT * FROM member";
 
+        $statement = $this->_dbh->prepare($sql);
+
+        /*
+        $statement->bindParam(':fname', $fname);
+        $statement->bindParam(':lname', $lname);
+        $statement->bindParam(':age', $age);
+        $statement->bindParam(':gender', $gender);
+        $statement->bindParam(':phone', $phone);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':state', $state);
+        $statement->bindParam(':seeking', $seeking);
+        $statement->bindParam(':bio', $bio);*/
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
 
     function getMember($member_id)
     {
+        $sql = "SELECT * FROM member
+                WHERE member_id = :member_id";
 
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam('member_id', $member_id);
+        /*
+        $statement->bindParam(':fname', $fname);
+        $statement->bindParam(':lname', $lname);
+        $statement->bindParam(':age', $age);
+        $statement->bindParam(':gender', $gender);
+        $statement->bindParam(':phone', $phone);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':state', $state);
+        $statement->bindParam(':seeking', $seeking);
+        $statement->bindParam(':bio', $bio);*/
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
 
     function getInterests($member_id)

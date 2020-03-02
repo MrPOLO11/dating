@@ -184,6 +184,8 @@ $f3->route('GET|POST /interests', function($f3) {
 //Define a personal route
 $f3->route('GET /summary', function() {
     $GLOBALS['controller']->summary();
+    $_SESSION = array();
+    session_destroy();
 });
 
 $f3->run();

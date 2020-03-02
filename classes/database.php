@@ -55,16 +55,11 @@ class Database
 
     function insertMember()
     {
-
-    }
-
-    function getMembers()
-    {
-        $sql = "SELECT * FROM member";
+        $sql = "INSERT INTO member
+                VALUES (:fname, :lname, :age, :gender, :phone, :email, :state, :seeking, :bio)";
 
         $statement = $this->_dbh->prepare($sql);
 
-        /*
         $statement->bindParam(':fname', $fname);
         $statement->bindParam(':lname', $lname);
         $statement->bindParam(':age', $age);
@@ -73,7 +68,18 @@ class Database
         $statement->bindParam(':email', $email);
         $statement->bindParam(':state', $state);
         $statement->bindParam(':seeking', $seeking);
-        $statement->bindParam(':bio', $bio);*/
+        $statement->bindParam(':bio', $bio);
+
+        $statement->execute();
+
+        $id = $this->_dbh->lastInsertId();
+    }
+
+    function getMembers()
+    {
+        $sql = "SELECT * FROM member";
+
+        $statement = $this->_dbh->prepare($sql);
 
         $statement->execute();
 
@@ -89,16 +95,6 @@ class Database
         $statement = $this->_dbh->prepare($sql);
 
         $statement->bindParam('member_id', $member_id);
-        /*
-        $statement->bindParam(':fname', $fname);
-        $statement->bindParam(':lname', $lname);
-        $statement->bindParam(':age', $age);
-        $statement->bindParam(':gender', $gender);
-        $statement->bindParam(':phone', $phone);
-        $statement->bindParam(':email', $email);
-        $statement->bindParam(':state', $state);
-        $statement->bindParam(':seeking', $seeking);
-        $statement->bindParam(':bio', $bio);*/
 
         $statement->execute();
 
@@ -108,6 +104,17 @@ class Database
 
     function getInterests($member_id)
     {
+        $sql = "SELECT * FROM interests
+                WHERE `member-interest`.member_id = :member_id
+                AND `member-interest`.interest_id = interests.interest_id";
 
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam('member_id', $member_id);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
 }

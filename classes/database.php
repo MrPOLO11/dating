@@ -26,8 +26,8 @@ require_once ("/home2/marcosri/config-dating.php");
  * );
  *
  * CREATE TABLE `member-interest` (
- * member_id INT,
- * interest_id INT,
+ * member_id INT PRIMARY KEY,
+ * interest_id INT PRIMARY KEY,
  * FOREIGN KEY (member_id) REFERENCES member(member_id),
  * FOREIGN KEY (interest_id) REFERENCES interest(interest_id)
  * );
@@ -48,7 +48,6 @@ class Database
         try {
             //Create a new PDO connection
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-            echo "Connected!";
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -78,13 +77,19 @@ class Database
 
     function getMembers()
     {
+        //Define the query
         $sql = "SELECT * FROM member
                 ORDER BY lname";
 
+        //Prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
+        //Bind the parameters
+
+        //Execute the parameters
         $statement->execute();
 
+        //Get the result
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;

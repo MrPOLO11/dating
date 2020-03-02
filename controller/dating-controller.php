@@ -22,8 +22,8 @@ class DatingController
         $members = $GLOBALS['db']->getMembers();
 
         $this->_f3->set('members', $members);
-        $view = new Template();
-        echo $view->render('views/admin.html');
+        $template = new Template();
+        echo $template->render('views/admin.html');
     }
 
     function personalInfo()

@@ -9,10 +9,15 @@
 
     <h1>Members List</h1>
 
-    <ol>
-        <repeat group="{{ @members }}" value="{{ @member }}">
-            <p>{{ @member['member_id'] }} - {{ @member['lname'] }}, {{ @member['fname'] }}</p>
-        </repeat>
-    </ol>
+    <thead>
+
+    </thead>
+
+    <tbody>
+    <repeat group="{{ @members }}" value="{{ @member}}">
+        <p>{{ @member['member_id'] }}</p>
+    </repeat>
+    </tbody>
+
 </div>
     <include href="views/footer.html">

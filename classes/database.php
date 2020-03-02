@@ -48,6 +48,7 @@ class Database
         try {
             //Create a new PDO connection
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            echo "Connected!";
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -77,13 +78,15 @@ class Database
 
     function getMembers()
     {
-        $sql = "SELECT * FROM member";
+        $sql = "SELECT * FROM member
+                ORDER BY lname";
 
         $statement = $this->_dbh->prepare($sql);
 
         $statement->execute();
 
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
         return $result;
     }
 

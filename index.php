@@ -86,99 +86,17 @@ $f3->route('GET /', function() {
 
 //Define a personal route
 $f3->route('GET|POST /personal', function($f3) {
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //Validate all
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $age = $_POST['age'];
-        $phone = $_POST['phone'];
-
-        //Optional
-        $gender = $_POST['gender'];
-        $premium = $_POST['premium'];
-
-        $f3->set('fname', $fname);
-        $f3->set('lname', $lname);
-        $f3->set('age', $age);
-        $f3->set('phone', $phone);
-        $f3->set('gender', $gender);
-        $f3->set('premium', $premium);
-
-        if($GLOBALS['controller']->validPersonalInformation()) {
-            if($premium === "checked") {
-                $_SESSION['member'] = new PremiumMember($fname, $lname, $age, $gender, $phone);
-                $_SESSION['premium'] = "isPremium";
-            } else {
-                $_SESSION['member'] = new Member($fname, $lname, $age, $gender, $phone);
-            }
-            /*
-            $_SESSION['fname'] = $fname;
-            $_SESSION['lname'] = $lname;
-            $_SESSION['age'] = $age;
-            $_SESSION['phone'] = $phone;
-            $_SESSION['gender'] = $gender;
-            */
-            $f3->reroute('/profile');
-        }
-    }
-    $GLOBALS['controller']->personalInfo();
+    $GLOBALS['controller']->checkPersonal();
 });
 
 //Define a profile route
 $f3->route('GET|POST /profile', function($f3) {
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //Must Validate
-        $email = $_POST['email'];
-
-        //Optional
-        $seek = $_POST['seek'];
-        $state = $_POST['state'];
-        $bio = $_POST['bio'];
-
-        $f3->set('email', $email);
-        $f3->set('seek', $seek);
-        $f3->set('state', $state);
-        $f3->set('bio', $bio);
-
-        var_dump($_POST);
-
-        if($GLOBALS['controller']->validProfile()) {
-            $_SESSION['member']->setEmail($email);
-            $_SESSION['member']->setSeeking($seek);
-            $_SESSION['member']->setState($state);
-            $_SESSION['member']->setBio($bio);
-            /*
-            $_SESSION['email'] = $email;
-            $_SESSION['seek'] = $seek;
-            $_SESSION['state'] = $state;
-            $_SESSION['bio'] = $bio;
-            */
-            if($_SESSION['premium'] === "isPremium") {
-                $f3->reroute('/interests');
-            }
-            $f3->reroute('/summary');
-        }
-    }
-    $GLOBALS['controller']->profile();
+    $GLOBALS['controller']->checkProfile();
 });
 
 //Define a personal route
 $f3->route('GET|POST /interests', function($f3) {
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        $selectIndoorInterests = $_POST['indoorInterests'];
-        $selectOutdoorInterests = $_POST['outdoorInterests'];
-
-        $f3->set('selectIndoorInterests', $selectIndoorInterests);
-        $f3->set('selectOutdoorInterests', $selectOutdoorInterests);
-
-        if($GLOBALS['controller']->validActivities()) {
-            $_SESSION['member']->setInDoorInterests($_POST['indoorInterests']);
-            $_SESSION['member']->setOutDoorInterests($_POST['outdoorInterests']);
-            $f3->reroute('/summary');
-        }
-    }
-    $GLOBALS['controller']->interests();
+    $GLOBALS['controller']->checkActivities();
 });
 
 //Define a personal route

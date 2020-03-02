@@ -29,14 +29,50 @@ class DatingController
         echo $view->render('views/profile.html');
     }
 
-    function interests() {
+    function interests()
+    {
         $view = new Template();
         echo $view->render('views/interests.html');
     }
 
-    function summary() {
+    function summary()
+    {
         $view = new Template();
         echo $view->render('views/profile-summary.html');
+    }
+
+    function checkPersonal()
+    {
+        global $f3;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //Validate all
+            $fname = $_POST['fname'];
+            $lname = $_POST['lname'];
+            $age = $_POST['age'];
+            $phone = $_POST['phone'];
+
+            //Optional
+            $gender = $_POST['gender'];
+            $premium = $_POST['premium'];
+
+            $f3->set('fname', $fname);
+            $f3->set('lname', $lname);
+            $f3->set('age', $age);
+            $f3->set('phone', $phone);
+            $f3->set('gender', $gender);
+            $f3->set('premium', $premium);
+
+            if ($GLOBALS['controller']->validPersonalInformation()) {
+                if ($premium === "checked") {
+                    $_SESSION['member'] = new PremiumMember($fname, $lname, $age, $gender, $phone);
+                    $_SESSION['premium'] = "isPremium";
+                } else {
+                    $_SESSION['member'] = new Member($fname, $lname, $age, $gender, $phone);
+                }
+                $f3->reroute('/profile');
+            }
+        }
+        $this->personalInfo();
     }
 
     function validPersonalInformation()
@@ -63,7 +99,47 @@ class DatingController
         return $isValid;
     }
 
-    function validProfile() {
+    function checkProfile()
+    {
+        global $f3;
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //Must Validate
+            $email = $_POST['email'];
+
+            //Optional
+            $seek = $_POST['seek'];
+            $state = $_POST['state'];
+            $bio = $_POST['bio'];
+
+            $f3->set('email', $email);
+            $f3->set('seek', $seek);
+            $f3->set('state', $state);
+            $f3->set('bio', $bio);
+
+            var_dump($_POST);
+
+            if($GLOBALS['controller']->validProfile()) {
+                $_SESSION['member']->setEmail($email);
+                $_SESSION['member']->setSeeking($seek);
+                $_SESSION['member']->setState($state);
+                $_SESSION['member']->setBio($bio);
+                /*
+                $_SESSION['email'] = $email;
+                $_SESSION['seek'] = $seek;
+                $_SESSION['state'] = $state;
+                $_SESSION['bio'] = $bio;
+                */
+                if($_SESSION['premium'] === "isPremium") {
+                    $f3->reroute('/interests');
+                }
+                $f3->reroute('/summary');
+            }
+        }
+        $this->profile();
+    }
+
+    function validProfile()
+    {
         global $f3;
         $isValid = true;
         if(!$this->_val->validEmail($f3->get('email'))) {
@@ -73,7 +149,28 @@ class DatingController
         return $isValid;
     }
 
-    function validActivities() {
+    function checkActivities()
+    {
+        global $f3;
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $selectIndoorInterests = $_POST['indoorInterests'];
+            $selectOutdoorInterests = $_POST['outdoorInterests'];
+
+            $f3->set('selectIndoorInterests', $selectIndoorInterests);
+            $f3->set('selectOutdoorInterests', $selectOutdoorInterests);
+
+            if($GLOBALS['controller']->validActivities()) {
+                $_SESSION['member']->setInDoorInterests($_POST['indoorInterests']);
+                $_SESSION['member']->setOutDoorInterests($_POST['outdoorInterests']);
+                $f3->reroute('/summary');
+            }
+        }
+        $this->interests();
+    }
+
+    function validActivities()
+    {
         global $f3;
         $isValid = true;
         if(!$this->_val->validOutdoor() || !$this->_val->validIndoor()) {

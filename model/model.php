@@ -2,6 +2,7 @@
 
 class Model
 {
+
     function validName($fname, $lname)
     {
         return !empty($fname) && ctype_alpha($fname) && !empty($lname) && ctype_alpha($lname);

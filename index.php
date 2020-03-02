@@ -140,6 +140,8 @@ $f3->route('GET|POST /profile', function($f3) {
         $f3->set('state', $state);
         $f3->set('bio', $bio);
 
+        var_dump($_POST);
+
         if($GLOBALS['controller']->validProfile()) {
             $_SESSION['member']->setEmail($email);
             $_SESSION['member']->setSeeking($seek);

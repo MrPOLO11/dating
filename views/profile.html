@@ -25,8 +25,8 @@
                                 <option value="select">Select</option>
                                 <repeat group="{{ @states }}" key="{{ @key }}" value="{{ @value }}">
                                     <check if="{{ @state == @key }}">
-                                        <true><option value="{{ @key }}" selected>{{ @value }}</option></true>
-                                        <false><option value="{{ @key }}">{{ @value }}</option></false>
+                                        <true><option value="{{ @value }}" selected>{{ @value }}</option></true>
+                                        <false><option value="{{ @value }}">{{ @value }}</option></false>
                                     </check>
                                 </repeat>
                             </select>

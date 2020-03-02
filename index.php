@@ -21,6 +21,7 @@ $f3 = Base::instance();
 //Turn on Fat-Free error reporting
 $f3->set('DEBUG', 3);
 
+$db = new Database();
 $controller = new DatingController($f3);
 
 //Define arrays

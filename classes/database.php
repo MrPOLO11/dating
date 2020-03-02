@@ -1,5 +1,5 @@
 <?php
-require_once ("config-dating.php");
+require_once ("home2/marcosri/config-dating.php");
 /**
  * Class Database
  *

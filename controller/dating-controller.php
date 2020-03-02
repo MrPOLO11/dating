@@ -37,6 +37,10 @@ class DatingController
 
     function summary()
     {
+        global $f3;
+        $member = new Member($f3->get('fname'), $f3->get('lname'), $f3->get('age'),
+            $f3->get('gender'), $f3->get('phone'));
+        $GLOBALS['db']->insertMember();
         $view = new Template();
         echo $view->render('views/profile-summary.html');
     }

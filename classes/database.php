@@ -1,5 +1,5 @@
 <?php
-
+require_once ("config-dating.php");
 /**
  * Class Database
  *
@@ -35,10 +35,22 @@
  */
 class Database
 {
+    //PDO Object
+    private $_dbh;
+
+    function __construct()
+    {
+        $this->connect();
+    }
 
     function connect()
     {
-
+        try {
+            //Create a new PDO connection
+            $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 
     function insertMember()

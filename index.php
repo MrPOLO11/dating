@@ -85,6 +85,11 @@ $f3->route('GET /', function() {
     $GLOBALS['controller']->home();
 });
 
+//Define a admin route
+$f3->route('GET /admin', function() {
+    $GLOBALS['controller']->viewMembers();
+});
+
 //Define a personal route
 $f3->route('GET|POST /personal', function($f3) {
     $GLOBALS['controller']->checkPersonal();

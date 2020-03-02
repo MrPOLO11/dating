@@ -17,6 +17,15 @@ class DatingController
         echo $view->render('views/home.html');
     }
 
+    function viewMembers()
+    {
+        $members = $GLOBALS['db']->getMembers();
+
+        $this->_f3->set('members', $members);
+        $view = new Template();
+        echo $view->render('views/admin.html');
+    }
+
     function personalInfo()
     {
         $view = new Template();
